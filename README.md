@@ -3,6 +3,7 @@ React, Next.js, Apollo Client starter kit application.
 
 ## Installation
 `yarn dev`
+
 Graphql Api: https://api.graph.cool/simple/v1/cjca0zkoj0fp301974g00ofxy
 
 ## Features
