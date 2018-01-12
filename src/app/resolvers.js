@@ -1,12 +1,12 @@
 export default {
   defaults: {
-    user: null,
+    currentUser: null,
     email: null,
   },
   resolvers: {
     Mutation: {
-      setUser: (_, { user }, { cache }) => {
-        cache.writeData({ data: { user, __typename: 'User' } })
+      setCurrentUser: (_, { currentUser }, { cache }) => {
+        cache.writeData({ data: { currentUser, __typename: 'User' } })
         return null
       },
       setEmail: (_, { email }, { cache }) => {

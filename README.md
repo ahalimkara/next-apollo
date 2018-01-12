@@ -12,6 +12,8 @@ Graphql Api: https://api.graph.cool/simple/v1/cjca0zkoj0fp301974g00ofxy
 - Server side rendering
 - Code splitting
 - File Upload (WIP)
+- SEO Friendly
+- Hot Module Replacement (HMR)
 
 ## Debug
 
@@ -26,7 +28,7 @@ Graphql Api: https://api.graph.cool/simple/v1/cjca0zkoj0fp301974g00ofxy
 
 Add breakpoints and hit the debug button.
 
-## Principles
+## Code Design
 - Keep it simple
 - Use stateless components as much as possible
 - 
