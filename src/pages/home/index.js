@@ -1,5 +1,4 @@
 import withViewer from '../../data/query/viewer'
 
 export default withViewer(({ viewer }) =>
-  <div>Welcome "{viewer && viewer.name}"</div>
-)
+  <div>Welcome &quot;{viewer && viewer.name}&quot;</div>)

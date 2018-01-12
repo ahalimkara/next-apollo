@@ -17,11 +17,10 @@ const onSuccess = (response, apollo) => {
   redirect('/')
 }
 
-const onSubmit = props => e => {
+const onSubmit = props => (e) => {
   e.preventDefault()
 
   props.form.validateFieldsAndScroll({ first: true, force: true }, (error, values) => {
-
     if (!error && !props.loading) {
       if (values.password !== values.password_confirmation) {
         props.form.setFields({ password_confirmation: { errors: [new Error('Please confirm your password')] } })
@@ -49,8 +48,8 @@ const Register = ({ errors, loading, onSubmit, form: { getFieldDecorator } }) =>
                        getFieldDecorator={getFieldDecorator} />
         <RequiredInput id="password" type="password" icon="lock" placeholder="Password"
                        getFieldDecorator={getFieldDecorator} />
-        <RequiredInput id="password_confirmation" type="password" icon="lock" placeholder="Confirm Password"
-                       getFieldDecorator={getFieldDecorator} />
+        <RequiredInput id="password_confirmation" type="password" icon="lock"
+                       placeholder="Confirm Password" getFieldDecorator={getFieldDecorator} />
         <Form.Item style={{ marginBottom: 0 }}>
           <Button type="primary" loading={loading} size="large" htmlType="submit"
                   className={s.wrapClassName('f-button')}>

@@ -12,6 +12,7 @@ export default () => (
         font-size: 13px;
         text-align: center;
       }
-    `}</style>
+    `}
+    </style>
   </Layout.Footer>
 )

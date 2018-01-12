@@ -1,0 +1,30 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "globals": {
+    "document": true,
+    "window": true,
+    "process": true,
+    "fetch": false
+  },
+  "rules": {
+    "semi": ["warn", "never"],
+    "no-console": "off",
+    "no-unused-vars": "warn",
+    "react/display-name": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-space-before-closing": ["error", "always"]
+  }
+}

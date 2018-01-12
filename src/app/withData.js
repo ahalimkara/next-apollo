@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import React from 'react'
 import { ApolloProvider, getDataFromTree } from 'react-apollo'
 import Head from 'next/head'
 import { wrapDisplayName } from 'recompose'

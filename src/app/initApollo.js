@@ -20,7 +20,6 @@ if (!process.browser) {
 }
 
 function create(initialState, accessToken) {
-
   const cache = new InMemoryCache().restore(initialState || {})
   const stateLink = withClientState({ ...resolvers, cache })
 
@@ -30,7 +29,7 @@ function create(initialState, accessToken) {
       headers: {
         ...headers,
         authorization: token ? `Bearer ${token}` : null,
-      }
+      },
     }
   })
 

@@ -17,7 +17,7 @@ const onSuccess = (response, apollo) => {
   redirect('/')
 }
 
-const onSubmit = props => e => {
+const onSubmit = props => (e) => {
   e.preventDefault()
 
   props.form.validateFields((err, values) => {

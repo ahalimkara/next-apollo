@@ -26,22 +26,3 @@ const Header = ({ viewer }) =>
   </StyledHeader>
 
 export default withViewer(Header)
-
-
-// const SET_VIEWER_MUTATION = gql`
-//     mutation setUser($user: User!) {
-//         setUser(user: $user) @client
-//     }
-// `
-//
-// export default compose(
-//   graphql(gql`{ user @client }`, {
-//     props: ({ ownProps, data: { user } }) => ({ user }),
-//   }),
-//   graphql(SET_VIEWER_MUTATION, {
-//     props: ({ mutate, ownProps: { user }, ...rest }) => {
-//       console.log(rest)
-//       return { setUser: () => mutate({ variables: { user } }) }
-//     },
-//   }),
-// )(Header)

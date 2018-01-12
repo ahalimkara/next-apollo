@@ -5,7 +5,6 @@ const resolveScopedStyles = scope => ({
 })
 
 export default (styles, Component) => {
-
   const styled = resolveScopedStyles(
     <scope>
       <style jsx>{styles}</style>
@@ -13,12 +12,12 @@ export default (styles, Component) => {
   )
 
   if (Component) {
-    return props => {
-      let { className, children, ...otherProps } = props
-      className = [styled.className, className].filter(Boolean).join(' ')
+    return (props) => {
+      const { className, children, ...otherProps } = props
+      const classes = [styled.className, className].filter(Boolean).join(' ')
 
       return (
-        <Component className={className} {...otherProps}>
+        <Component className={classes} {...otherProps}>
           {children}
 
           <styled.styles />

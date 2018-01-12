@@ -12,7 +12,11 @@ export default ({ children }) =>
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.0.2/antd.min.css" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.0.2/antd.min.css"
+        />
         <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
         <title>{APP_NAME}</title>
       </Head>
@@ -30,6 +34,8 @@ const NProgressDone = () => {
   clearTimeout(timeoutId)
   NProgress.done()
 }
-Router.onRouteChangeStart = () => timeoutId = setTimeout(NProgress.start, 100)
+Router.onRouteChangeStart = () => {
+  timeoutId = setTimeout(NProgress.start, 100)
+}
 Router.onRouteChangeComplete = NProgressDone
 Router.onRouteChangeError = NProgressDone

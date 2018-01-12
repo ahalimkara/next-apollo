@@ -11,6 +11,4 @@ export const query = gql`
     }
 `
 
-export default graphql(query, {
-  props: ({ data: { viewer } }) => ({ viewer })
-})
+export default graphql(query, { props: ({ data: { viewer } }) => ({ viewer }) })

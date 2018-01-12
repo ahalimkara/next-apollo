@@ -1,4 +1,4 @@
-/*language=CSS*/
+/* language=CSS */
 export default `
   body {
     color: #212529;
