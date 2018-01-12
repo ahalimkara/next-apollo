@@ -11,6 +11,12 @@
           "recompose"
         ]
       }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "antd"
+      }
     ]
   ]
 }

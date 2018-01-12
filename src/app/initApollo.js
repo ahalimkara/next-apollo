@@ -34,10 +34,10 @@ function create(initialState, accessToken) {
     }
   })
 
-  const link = ApolloLink.from([new ApolloLogger(), stateLink, authLink.concat(new HttpLink({
+  const link = ApolloLink.from([new ApolloLogger(), stateLink, authLink, new HttpLink({
     uri: GRAPHQL_API, // Server URL (must be absolute)
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-  }))])
+  })])
 
   return new ApolloClient({
     connectToDevTools: process.browser,
