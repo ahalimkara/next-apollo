@@ -29,6 +29,7 @@ const checkViewer = (Component, auth = null, redirectTo = null) => {
 
     if (redirectTo && Boolean(auth) === !viewer) {
       redirect(redirectTo, ctx)
+      return null
     }
 
     let props = {}

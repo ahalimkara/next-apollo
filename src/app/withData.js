@@ -11,12 +11,13 @@ export default ComposedComponent => {
     static displayName = wrapDisplayName(ComposedComponent, 'WithData')
 
     static propTypes = {
-      apolloState: PropTypes.object.isRequired
+      apolloState: PropTypes.object.isRequired,
     }
 
     static async getInitialProps(ctx) {
       // Initial apolloState with apollo (empty)
       let apolloState = { apollo: { data: {} } }
+      let runQueries = !process.browser
 
       const accessToken = ctx.req && ctx.req.cookies && ctx.req.cookies.accessToken
       const apollo = initApollo({}, accessToken)
@@ -25,11 +26,17 @@ export default ComposedComponent => {
       let composedInitialProps = {}
       if (ComposedComponent.getInitialProps) {
         composedInitialProps = await ComposedComponent.getInitialProps(ctx, apollo)
+
+        // if it is a redirect etc.
+        if (composedInitialProps === null) {
+          runQueries = false
+          composedInitialProps = {}
+        }
       }
 
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
-      if (!process.browser) {
+      if (runQueries) {
         try {
           // Run all GraphQL queries
           await getDataFromTree(
@@ -40,8 +47,8 @@ export default ComposedComponent => {
               router: {
                 asPath: ctx.asPath,
                 pathname: ctx.pathname,
-                query: ctx.query
-              }
+                query: ctx.query,
+              },
             }
           )
         } catch (error) {
@@ -57,15 +64,15 @@ export default ComposedComponent => {
         // Extract query data from the Apollo store
         apolloState = {
           apollo: {
-            data: apollo.cache.extract()
-          }
+            data: apollo.cache.extract(),
+          },
         }
       }
 
       return {
         apolloState,
         accessToken,
-        ...composedInitialProps
+        ...composedInitialProps,
       }
     }
 

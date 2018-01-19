@@ -1,11 +1,14 @@
 import Router from 'next/router'
+import { prependLocale } from './withLocale'
 
-export default (target, { res } = {}) => {
+export default (target, { asPath, res } = {}) => {
+
   if (res) {
-    res.writeHead(301, { Location: target })
+    target = prependLocale(asPath, target)
+    res.writeHead(302, { Location: target })
     res.end()
     res.finished = true
   } else {
-    Router.replace(target)
+    Router.replace(target, prependLocale(Router.asPath, target))
   }
 }

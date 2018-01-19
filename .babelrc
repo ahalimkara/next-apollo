@@ -17,6 +17,7 @@
       {
         "libraryName": "antd"
       }
-    ]
+    ],
+    "react-intl"
   ]
 }

@@ -1,5 +1,5 @@
 # Next Apollo
-React, Next.js, Apollo Client starter kit.
+React, Next.js, GraphQL, Apollo Client starter kit.
 
 ## Installation
 `yarn dev`
@@ -8,7 +8,7 @@ GraphQL Api: https://api.graph.cool/simple/v1/cjca0zkoj0fp301974g00ofxy
 
 ## Features
 - Authentication
-- Internationalization (WIP)
+- Internationalization
 - Server side rendering
 - Code splitting
 - File Upload (WIP)
@@ -17,6 +17,13 @@ GraphQL Api: https://api.graph.cool/simple/v1/cjca0zkoj0fp301974g00ofxy
 - Ant design
 
 ## Debug
+
+### Chrome DevTools (55+)
+node v8.5.0+
+
+`yarn inspect`
+
+Go to: `chrome://inspect/`
 
 ### WebStorm (2017.2+)
 

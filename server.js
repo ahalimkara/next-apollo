@@ -1,13 +1,18 @@
 const express = require('express')
 const next = require('next')
+const routes = require('./src/app/routes')
+// const currentLocale = require('./src/app/withLocale').currentLocale
 const compression = require('compression')
 const favicon = require('serve-favicon')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const app = next({ dev, quiet: !dev })
+const handler = routes.getRequestHandler(app, ({req, res, route, query}) => {
+  // req.locale = currentLocale(req.originalUrl)
+  app.render(req, res, route.page, query)
+})
 
 app.prepare()
   .then(() => {
@@ -16,9 +21,7 @@ app.prepare()
     server.use(favicon(path.join(__dirname, 'static/favicon.ico')))
     server.use(cookieParser())
 
-    server.get('*', (req, res) => {
-      return handle(req, res)
-    })
+    server.use(handler)
 
     server.listen(3000, (err) => {
       if (err) throw err

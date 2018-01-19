@@ -1,4 +1,5 @@
 import { Form, Icon, Input } from 'antd'
+import withIntl from '../../app/withIntl'
 
 const NormalInput = (props) => {
   const { id, icon, getFieldDecorator, decorator, ...passThroughProps } = props
@@ -9,7 +10,13 @@ const NormalInput = (props) => {
   }</Form.Item>
 }
 
-export const RequiredInput = props =>
-  <NormalInput decorator={{ rules: [{ required: true, message: 'This field is required' }] }} {...props} />
+export const RequiredInput = withIntl(({ intl: { fm }, ...props }) =>
+  <NormalInput decorator={{
+    rules: [{
+      required: true,
+      message: fm('This field is required'),
+    }],
+  }} {...props} />
+)
 
 export default NormalInput

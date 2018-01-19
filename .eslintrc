@@ -20,6 +20,7 @@
   },
   "rules": {
     "semi": ["warn", "never"],
+    "comma-dangle": ["error", "always-multiline"],
     "no-console": "off",
     "no-unused-vars": "warn",
     "react/display-name": "off",

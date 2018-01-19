@@ -1,10 +1,14 @@
 import { Layout } from 'antd'
+import T from '../../components/T'
 import { APP_NAME } from '../../config'
+import Locales from '../Locales'
 
 export default () => (
   <Layout.Footer>
     <div className="container">
-      {APP_NAME} &copy;{new Date().getFullYear()} All rights reserved
+      {APP_NAME} &copy;{new Date().getFullYear()}{' '}
+      <T m="All rights reserved" />{' '}
+      <Locales onlyIcon={true} />
     </div>
     <style jsx>{`
       div {

@@ -1,4 +1,6 @@
+import T from '../../components/T'
+
 export default ({ viewer }) =>
   <div>
-    Profile: {viewer.name}
+    <T m="Profile" />: {viewer.name}
   </div>
