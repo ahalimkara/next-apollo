@@ -50,7 +50,7 @@ const Register = ({ intl: { fm }, errors, loading, onSubmit, form: { getFieldDec
                                              style={{ marginBottom: '20px' }} />)}
 
       <Form onSubmit={onSubmit}>
-        <RequiredInput id="name" icon="user" placeholder="Name"
+        <RequiredInput id="name" icon="user" placeholder={fm('Email')}
                        getFieldDecorator={getFieldDecorator} />
         <RequiredInput id="email" type="email" icon="mail" placeholder={fm('Email')}
                        getFieldDecorator={getFieldDecorator} />
