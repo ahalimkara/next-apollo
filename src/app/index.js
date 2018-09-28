@@ -12,6 +12,8 @@ import { APP_NAME } from '../config'
 import withLocale from './withLocale'
 import translations from '../../translations'
 
+import '../styles/index.css'
+
 addLocaleData([...en, ...ku])
 const now = Date.now()
 
@@ -23,8 +25,6 @@ export default withLocale(({ locale: { currentLocale }, children }) =>
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="stylesheet" type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.0.2/antd.min.css" />
           <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
           <title>{APP_NAME}</title>
         </Head>

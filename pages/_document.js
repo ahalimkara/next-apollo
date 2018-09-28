@@ -1,7 +1,6 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import flush from 'styled-jsx/server'
 
-import css from '../src/styles'
 import { currentLocale } from '../src/app/withLocale'
 
 export default class AppDocument extends Document {
@@ -18,9 +17,7 @@ export default class AppDocument extends Document {
 
     return (
       <html lang={this.props.locale}>
-        <Head>
-          <style>{css}</style>
-        </Head>
+        <Head />
         <body>
           <Main />
           <script src={intlPolyfill} />
