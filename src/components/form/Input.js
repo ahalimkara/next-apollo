@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Form, Icon, Input } from 'antd'
 import withIntl from '../../app/withIntl'
 

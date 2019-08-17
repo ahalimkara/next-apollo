@@ -7,7 +7,7 @@ import { menuStyles } from './styles'
 export default () =>
   <Menu mode="horizontal" className={menuStyles.className}>
     <Menu.Item key="/login">
-      <Link href="/profile">
+      <Link href="/login">
         <a><T m="Login" /></a>
       </Link>
     </Menu.Item>

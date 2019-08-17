@@ -1,6 +1,5 @@
-import { compose } from 'recompose'
+import React from 'react'
 
-import withData from '../src/app/withData'
 import { guestPage } from '../src/app/auth'
 
 import Layout from '../src/layouts/default'
@@ -11,9 +10,4 @@ const Page = props =>
     <Login {...props} />
   </Layout>
 
-const enhance = compose(
-  withData,
-  guestPage,
-)
-
-export default enhance(Page)
+export default guestPage(Page)

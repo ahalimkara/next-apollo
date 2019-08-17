@@ -30,15 +30,16 @@ export const currentLocale = asPath => asPath.match(pathRegExp)[2] || config.DEF
 export const prependLocale = (asPath, target) => {
   const match = asPath.match(pathRegExp)
   const locale = match[2] && match[2] !== config.DEFAULT_LOCALE ? match[2] : ''
+  let path
 
   if (typeof target === 'object') {
-    target.pathname = formatPath(target.pathname, locale)
+    path = formatPath(target.asPath, locale)
 
   } else if (typeof target === 'string') {
-    target = formatPath(target, locale)
+    path = formatPath(target, locale)
   }
 
-  return target
+  return path
 }
 
 

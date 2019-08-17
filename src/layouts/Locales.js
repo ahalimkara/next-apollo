@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button, Dropdown, Menu } from 'antd'
 
 import { LOCALE_NAMES } from '../config'

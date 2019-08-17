@@ -15,8 +15,7 @@
     [
       "import",
       {
-        "libraryName": "antd",
-        "style": "css"
+        "libraryName": "antd"
       }
     ],
     "react-intl"

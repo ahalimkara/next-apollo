@@ -1,10 +1,11 @@
+import React from 'react'
 import Cookies from 'js-cookie'
 
 import redirect from './redirect'
 import { query } from '../data/query/viewer'
 // import { mutation } from '../data/mutation/revokeToken'
 
-export const getViewer = (context, apollo) =>
+export const getViewer = apollo =>
   apollo
     .query({ query })
     .then(({ data }) => (data && data.viewer) || null)
@@ -12,24 +13,25 @@ export const getViewer = (context, apollo) =>
 
 export const login = async (token, apollo) => {
   Cookies.set('accessToken', token, { expires: 365 })
-  await apollo.resetStore()
+  await apollo.cache.reset()
 }
 
 export const logout = async (apollo) => {
   // await apollo.mutate({ mutation })
   Cookies.remove('accessToken')
-  await apollo.resetStore()
+  await apollo.cache.reset()
 }
 
 const checkViewer = (Component, auth = null, redirectTo = null) => {
   const Comp = props => <Component {...props} />
 
-  Comp.getInitialProps = async (ctx, apollo) => {
-    const viewer = await getViewer(ctx, apollo)
+  Comp.getInitialProps = async (ctx) => {
+    const { apolloClient: apollo } = ctx
+    const viewer = await getViewer(apollo)
 
     if (redirectTo && Boolean(auth) === !viewer) {
       redirect(redirectTo, ctx)
-      return null
+      return {}
     }
 
     let props = {}

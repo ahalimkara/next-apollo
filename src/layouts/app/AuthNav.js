@@ -10,8 +10,8 @@ import redirect from '../../app/redirect'
 import { menuStyles } from './styles'
 import T from '../../components/T'
 
-const handleLogout = props => () => {
-  logout(props.client)
+const handleLogout = props => async () => {
+  await logout(props.client)
   redirect('/login')
 }
 

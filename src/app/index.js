@@ -1,3 +1,4 @@
+import React from 'react'
 import Head from 'next/head'
 import NProgress from 'nprogress'
 import Router from 'next/router'
@@ -6,8 +7,9 @@ import { IntlProvider, addLocaleData } from 'react-intl'
 import en from 'react-intl/locale-data/en'
 import ku from 'react-intl/locale-data/ku'
 
-import { Layout, LocaleProvider as AntLocaleProvider } from 'antd'
+import { Layout, ConfigProvider as AntConfigProvider } from 'antd'
 import enUS from 'antd/lib/locale-provider/en_US'
+import kuIQ from 'antd/lib/locale-provider/ku_IQ'
 import { APP_NAME } from '../config'
 import withLocale from './withLocale'
 import translations from '../../translations'
@@ -17,10 +19,11 @@ import '../styles/index.css'
 addLocaleData([...en, ...ku])
 const now = Date.now()
 
-// TODO set antd locale once Kurdish PR merged
+const localeToAntLocale = currentLocale => currentLocale === 'ku' ? kuIQ : enUS
+
 export default withLocale(({ locale: { currentLocale }, children }) =>
   <IntlProvider locale={currentLocale} initialNow={now} messages={translations[currentLocale]}>
-    <AntLocaleProvider locale={enUS}>
+    <AntConfigProvider locale={localeToAntLocale(currentLocale)}>
       <div>
         <Head>
           <meta charSet="utf-8" />
@@ -33,7 +36,7 @@ export default withLocale(({ locale: { currentLocale }, children }) =>
           {children}
         </Layout>
       </div>
-    </AntLocaleProvider>
+    </AntConfigProvider>
   </IntlProvider>
 )
 
@@ -43,8 +46,9 @@ const NProgressDone = () => {
   clearTimeout(timeoutId)
   NProgress.done()
 }
-Router.onRouteChangeStart = () => {
+const handleRouteChange = () => {
   timeoutId = setTimeout(NProgress.start, 100)
 }
-Router.onRouteChangeComplete = NProgressDone
-Router.onRouteChangeError = NProgressDone
+Router.events.on('routeChangeStart', handleRouteChange)
+Router.events.on('routeChangeComplete', NProgressDone)
+Router.events.on('routeChangeError', NProgressDone)

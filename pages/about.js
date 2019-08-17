@@ -1,6 +1,8 @@
+import React from 'react'
+
 import App from '../src/app/index'
 
-export default props => (
+export default () =>
   <App>
     <article>
       <h1>The Idea Behind This Example</h1>
@@ -18,7 +20,7 @@ export default props => (
         inside a{' '}
         <a href='https://facebook.github.io/react/docs/higher-order-components.html'>
           higher-order component (HOC)
-        </a>. Using the HOC pattern we're able to pass down a central store of
+        </a>. Using the HOC pattern we are able to pass down a central store of
         query result data created by Apollo into our React component hierarchy
         defined inside each page of our Next application.
       </p>
@@ -36,4 +38,3 @@ export default props => (
       </p>
     </article>
   </App>
-)

@@ -1,6 +1,5 @@
-import { compose } from 'recompose'
+import React from 'react'
 
-import withData from '../src/app/withData'
 import { authPage } from '../src/app/auth'
 
 import Layout from '../src/layouts/app'
@@ -11,9 +10,4 @@ const Page = props =>
     <Profile {...props} />
   </Layout>
 
-const enhance = compose(
-  withData,
-  authPage,
-)
-
-export default enhance(Page)
+export default authPage(Page)

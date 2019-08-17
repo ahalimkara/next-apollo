@@ -25,7 +25,7 @@ node v8.5.0+
 
 Go to: `chrome://inspect/`
 
-### WebStorm (2017.2+)
+### WebStorm (2019.2+)
 
 `Run -> Edit Configurations...`
 
@@ -38,5 +38,3 @@ Add breakpoints and hit the debug button.
 
 ## Code Design
 - Keep it simple
-- Use stateless components as much as possible
-- 

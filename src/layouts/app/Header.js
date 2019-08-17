@@ -1,8 +1,9 @@
+import React from 'react'
+
 import Link from '../../components/Link'
-
 import GuestNav from './GuestNav'
-import AuthNav from './AuthNav'
 
+import AuthNav from './AuthNav'
 import { APP_NAME } from '../../config'
 import withViewer from '../../data/query/viewer'
 import { menuStyles, headerStyles, StyledHeader } from './styles'

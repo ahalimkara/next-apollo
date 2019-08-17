@@ -14,8 +14,8 @@ import redirect from '../../app/redirect'
 import s from './styles'
 import { APP_NAME } from '../../config'
 
-const onSuccess = (response, apollo) => {
-  login(response.data.login.accessToken, apollo)
+const onSuccess = async (response, apollo) => {
+  await login(response.data.login.accessToken, apollo)
   redirect('/')
 }
 
@@ -50,7 +50,7 @@ const Register = ({ intl: { fm }, errors, loading, onSubmit, form: { getFieldDec
                                              style={{ marginBottom: '20px' }} />)}
 
       <Form onSubmit={onSubmit}>
-        <RequiredInput id="name" icon="user" placeholder={fm('Email')}
+        <RequiredInput id="name" icon="user" placeholder={fm('Name')}
                        getFieldDecorator={getFieldDecorator} />
         <RequiredInput id="email" type="email" icon="mail" placeholder={fm('Email')}
                        getFieldDecorator={getFieldDecorator} />

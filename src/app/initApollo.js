@@ -1,61 +1,68 @@
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { HttpLink } from 'apollo-link-http'
+import 'cross-fetch/polyfill'
+import { ApolloClient, InMemoryCache } from 'apollo-boost'
+import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
-import { withClientState } from 'apollo-link-state'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import fetch from 'isomorphic-unfetch'
-import Cookies from 'js-cookie'
 
 import resolvers from './resolvers'
-
 import ApolloLogger from './ApolloLogger'
 import { GRAPHQL_API } from '../config'
 
 let apolloClient = null
 
-// Polyfill fetch() on the server (used by apollo-client)
-if (!process.browser) {
-  global.fetch = fetch
-}
-
-function create(initialState, accessToken) {
-  const cache = new InMemoryCache().restore(initialState || {})
-  const stateLink = withClientState({ ...resolvers, cache })
+function create(initialState, { getToken, fetchOptions }) {
+  const httpLink = createHttpLink({
+    uri: GRAPHQL_API,
+    credentials: 'same-origin',
+    fetchOptions,
+  })
 
   const authLink = setContext((_, { headers }) => {
-    const token = process.browser ? Cookies.get('accessToken') : accessToken
+    const token = getToken()
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : null,
+        authorization: token ? `Bearer ${token}` : '',
       },
     }
   })
 
-  const link = ApolloLink.from([new ApolloLogger(), stateLink, authLink, new HttpLink({
-    uri: GRAPHQL_API, // Server URL (must be absolute)
-    credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-  })])
-
+  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+  const isBrowser = typeof window !== 'undefined'
   return new ApolloClient({
-    connectToDevTools: process.browser,
-    ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
-    link,
-    cache,
+    connectToDevTools: isBrowser,
+    ssrMode: !isBrowser, // Disables forceFetch on the server (so queries are only run once)
+    link: new ApolloLogger().concat(authLink).concat(httpLink),
+    cache: new InMemoryCache().restore(initialState || {}),
+    clientState: {
+      defaults: {
+        isConnected: true,
+      },
+      resolvers,
+    },
   })
 }
 
-export default (initialState, accessToken) => {
+export default function initApollo (initialState, options) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (!process.browser) {
-    return create(initialState, accessToken)
+  if (typeof window === 'undefined') {
+    let fetchOptions = {}
+    // If you are using a https_proxy, add fetchOptions with 'https-proxy-agent' agent instance
+    // 'https-proxy-agent' is required here because it's a sever-side only module
+    if (process.env.https_proxy) {
+      fetchOptions = {
+        agent: new (require('https-proxy-agent'))(process.env.https_proxy),
+      }
+    }
+    return create(initialState, {
+      ...options,
+      fetchOptions,
+    })
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState, accessToken)
+    apolloClient = create(initialState, options)
   }
 
   return apolloClient
