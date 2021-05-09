@@ -27,7 +27,7 @@
     "hoist-non-react-statics": "3.3.0",
     "https-proxy-agent": "2.2.2",
     "js-cookie": "2.2.0",
-    "lodash": "4.17.15",
+    "lodash": "4.17.21",
     "next": "9.0.3",
     "next-routes": "1.4.2",
     "nprogress": "0.2.0",
